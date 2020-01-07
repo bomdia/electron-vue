@@ -10,7 +10,7 @@ function getCurrentSHA (author) {
 
     get({
       host: 'api.github.com',
-      path: `/repos/simulatedgreg/electron-vue/commits${isBranch ? '?sha=' + process.argv[2].split('#')[1] : ''}`,
+      path: `/repos/bomdia/electron-vue/commits${isBranch ? '?sha=' + process.argv[2].split('#')[1] : ''}`,
       headers: {
         'User-Agent': author
       }
@@ -40,7 +40,7 @@ function appendSHALink (sha, destDirName) {
   let md = readFileSync(readmePath, 'utf8')
   md = md.replace(
     ' using',
-    `@[${sha.substring(0, 7)}](https://github.com/SimulatedGREG/electron-vue/tree/${sha}) using`
+    `@[${sha.substring(0, 7)}](https://github.com/bomdia/electron-vue/tree/${sha}) using`
   )
   writeFileSync(readmePath, md, 'utf8')
 }
@@ -145,11 +145,11 @@ module.exports = {
     deps (plugins) {
       let output = ''
       let dependencies = {
-        'axios': '^0.18.0',
+        'axios': '^0.19.0',
         'vue-electron': '^1.0.6',
-        'vue-router': '^3.0.1',
-        'vuex': '^3.0.1',
-        'vuex-electron': '^1.0.0'
+        'vue-router': '^3.1.3',
+        'vuex': '^3.1.2',
+        'vuex-electron': '^1.0.3'
       }
 
       if (Object.keys(plugins).length > 0) output += ',\n'
@@ -195,7 +195,7 @@ module.exports = {
         '',
         `Next Steps:\n${!data.inPlace ? '\n  \x1b[33m$\x1b[0m cd ' + data.destDirName : ''}`,
         '  \x1b[33m$\x1b[0m yarn (or `npm install`)',
-        '  \x1b[33m$\x1b[0m yarn run dev (or `npm run dev`)'
+        '  \x1b[33m$\x1b[0m yarn dev (or `npm run dev`)'
       ].join('\n'))
     }, () => {
       console.log('\x1b[33mwarning\x1b[0m Failed to append commit SHA on README.md')

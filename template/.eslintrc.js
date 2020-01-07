@@ -1,23 +1,38 @@
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
   parserOptions: {
+    parser: 'babel-eslint',
     sourceType: 'module'
   },
   env: {
     browser: true,
     node: true
   },
-  {{#if_eq eslintConfig 'standard'}}
-  extends: 'standard',
-  {{/if_eq}}
-  {{#if_eq eslintConfig 'airbnb'}}
-  extends: 'airbnb-base',
-  {{/if_eq}}
   globals: {
     __static: true
   },
+  {{#if_eq eslintConfig 'standard'}}
+  extends: [
+    // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
+    // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
+    // https://github.com/standard/standard/blob/master/docs/RULES-en.md
+    //'plugin:vue/essential',
+    'plugin:vue/recommended',
+    'standard'
+  ],
+  {{/if_eq}}
+  {{#if_eq eslintConfig 'airbnb'}}
+  extends: [
+    // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
+    // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
+    // https://github.com/standard/standard/blob/master/docs/RULES-en.md
+    //'plugin:vue/essential',
+    'plugin:vue/recommended',
+    'airbnb-base'
+  ],
+  {{/if_eq}}
   plugins: [
+    'vue',
     'html'
   ],
   'rules': {
